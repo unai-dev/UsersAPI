@@ -44,5 +44,33 @@ namespace UsersAPI.Controllers
             return group;
         }
 
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Group>> Put(int id, Group group)
+        {
+            if (id != group.Id)
+            {
+                return BadRequest("Id's not sames");
+            }
+
+            context.Update(group);
+
+            await context.SaveChangesAsync();
+
+            return Accepted();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var registerDeleted = await context.Groups.Where(x => x.Id == id).ExecuteDeleteAsync();
+
+            if (registerDeleted == 0)
+            {
+                return NotFound($"User with id {id} not found");
+            }
+
+            return NoContent();
+        }
+
     }
 }

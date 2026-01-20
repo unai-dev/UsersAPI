@@ -8,7 +8,7 @@ namespace UsersAPI.Controllers
 
     [ApiController]
     [Route("api/users")]
-    public class UserController: ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext context;
 
@@ -44,7 +44,35 @@ namespace UsersAPI.Controllers
             return user;
         }
 
-        
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<User>> Put(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest("Id's not sames");
+            }
+
+            context.Update(user);
+
+            await context.SaveChangesAsync();
+
+            return Accepted();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var registerDeleted = await context.Users.Where(x => x.Id == id).ExecuteDeleteAsync();
+
+            if (registerDeleted == 0)
+            {
+                return NotFound($"User with id {id} not found");
+            }
+
+            return NoContent();
+        }
+
+
 
     }
 }
