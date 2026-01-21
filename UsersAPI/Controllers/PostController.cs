@@ -49,7 +49,7 @@ namespace UsersAPI.Controllers
             {
                 return NotFound($"Post with id {id} not found");
             }
-
+            
             return post;
         }
 
