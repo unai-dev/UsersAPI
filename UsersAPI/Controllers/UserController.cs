@@ -34,7 +34,7 @@ namespace UsersAPI.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await context.Users.Include(x => x.Posts).FirstOrDefaultAsync(x => x.Id == id);
 
             if (user is null)
             {
