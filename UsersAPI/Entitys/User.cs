@@ -9,5 +9,9 @@ namespace UsersAPI.Entitys
 
         [Required]
         public required string Username { get; set; }
+
+        public List<Posts> Posts { get; set; }
+
+
     }
 }

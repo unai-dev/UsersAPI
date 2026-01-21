@@ -11,5 +11,6 @@ namespace UsersAPI.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Posts> Posts { get; set; }
     }
 }
