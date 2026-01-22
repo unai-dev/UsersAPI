@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using UsersAPI.Validations;
 
 namespace UsersAPI.Entitys
 {
@@ -7,7 +8,9 @@ namespace UsersAPI.Entitys
 
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The field {0} is required")]
+        [StringLength(100, MinimumLength = 10)]
+        [FirstLetterUpper]
         public required string Name { get; set; }
 
         [Required]

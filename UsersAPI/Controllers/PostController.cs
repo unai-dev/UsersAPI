@@ -25,7 +25,8 @@ namespace UsersAPI.Controllers
 
             if (!user)
             {
-                return NotFound($"User with id {post.UserId} not found");
+                ModelState.AddModelError(nameof(post.UserId), $"User with id {post.UserId} not found");
+                return ValidationProblem();
             }
 
             context.Add(post);
@@ -65,7 +66,8 @@ namespace UsersAPI.Controllers
 
             if (!user)
             {
-                return NotFound($"User with id {post.UserId} not found");
+                ModelState.AddModelError(nameof(post.UserId), $"User with id {post.UserId} not found");
+                return ValidationProblem();
             }
 
             context.Update(post);
